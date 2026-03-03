@@ -27,7 +27,7 @@ nav{
   justify-content:space-between;
   align-items:center;
   padding:20px 8%;
-  background:rgba(8,21,43,0.9);
+  background:rgba(8,21,43,0.95);
   backdrop-filter:blur(10px);
 }
 
@@ -53,6 +53,7 @@ nav ul li a{
   border:1px solid rgba(250,204,21,0.4);
   transition:all 0.3s ease;
   font-weight:500;
+  cursor:pointer;
 }
 
 nav ul li a:hover{
@@ -61,7 +62,6 @@ nav ul li a:hover{
   box-shadow:0 0 15px rgba(250,204,21,0.6);
 }
 
-/* ACTIVE NAV BUTTON */
 .active-nav{
   background:#facc15;
   color:#08152b !important;
@@ -89,27 +89,19 @@ nav ul li a:hover{
   opacity:0.9;
 }
 
-#introBubble{
-  margin:30px auto;
+.hero img{
   width:200px;
   height:200px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-#introBubble img{
-  width:180px;
-  height:180px;
   border-radius:50%;
   object-fit:cover;
+  margin-top:30px;
   border:5px solid #facc15;
 }
 
 /* CONTENT */
 .content{
   display:none;
-  padding:40px 10%;
+  padding:50px 10%;
   text-align:center;
   animation:fadeIn 0.4s ease;
 }
@@ -128,7 +120,7 @@ h2{
   margin-bottom:30px;
 }
 
-/* PREMIUM CARDS */
+/* CARD STYLE */
 .card{
   background:#1e293b;
   padding:25px;
@@ -143,13 +135,33 @@ h2{
   box-shadow:0 0 25px rgba(250,204,21,0.4);
 }
 
+/* ACHIEVEMENT IMAGES */
+.achievement-images{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+.achievement-images img{
+  width:100%;
+  border-radius:18px;
+  border:3px solid #facc15;
+  transition:0.3s ease;
+}
+
+.achievement-images img:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(250,204,21,0.6);
+}
+
 footer{
   text-align:center;
   padding:30px;
   opacity:0.7;
 }
 
-@media (max-width:768px){
+@media(max-width:768px){
   nav{
     flex-direction:column;
   }
@@ -177,21 +189,16 @@ footer{
     <li><a onclick="showSection('experience', this)">Experience</a></li>
     <li><a onclick="showSection('education', this)">Education</a></li>
     <li><a onclick="showSection('achievements', this)">Achievements</a></li>
-    <li><a onclick="showSection('gallery', this)">Gallery</a></li>
-    <li><a href="projects.html">Projects</a></li>
+    <li><a href="products.html">Products</a></li>
   </ul>
 </nav>
 
 <section class="hero">
   <h1>Hello, I'm <span class="highlight">Anil Salvi</span></h1>
   <div class="typing" id="typing"></div>
-
-  <div id="introBubble">
-    <img src="myphoto.png" alt="My Photo">
-  </div>
+  <img src="myphoto.png" alt="My Photo">
 </section>
 
-<!-- SECTIONS -->
 <div id="about" class="content">
   <h2>About Me</h2>
   <div class="card">
@@ -209,7 +216,7 @@ footer{
 <div id="experience" class="content">
   <h2>Experience</h2>
   <div class="card">
-    Acting School Coordinator – Academic & Digital System Leadership
+    Acting School Coordinator – Academic & Digital Innovation Leadership
   </div>
 </div>
 
@@ -223,14 +230,15 @@ footer{
 
 <div id="achievements" class="content">
   <h2>Achievements</h2>
+
   <div class="card">🏆 Best Teacher Award 2025–26 – Indian Talent Olympiad</div>
   <div class="card">🌱 Eco Club – Mission LiFE (Teacher In-Charge)</div>
-</div>
+  <div class="card">🛡 Prahari Club – National Child Rights (Teacher In-Charge)</div>
 
-<div id="gallery" class="content">
-  <h2>Gallery</h2>
-  <div class="card">
-    Add your images here.
+  <div class="achievement-images">
+      <img src="award1.jpg" alt="Best Teacher Award">
+      <img src="award2.jpg" alt="Teacher Certificate">
+      <img src="eco.jpg" alt="Eco Club Document">
   </div>
 </div>
 
@@ -240,7 +248,6 @@ footer{
 
 <script>
 
-/* SECTION TOGGLE WITH ACTIVE BUTTON */
 function showSection(id, element){
   document.querySelectorAll(".content").forEach(sec=>{
     sec.classList.remove("active");
@@ -255,7 +262,7 @@ function showSection(id, element){
   element.classList.add("active-nav");
 }
 
-/* TYPING EFFECT */
+/* Typing Effect */
 const texts=["Educator","National Awardee","School Leader","Digital Learning Innovator"];
 let textIndex=0,charIndex=0,isDeleting=false;
 const typing=document.getElementById("typing");
