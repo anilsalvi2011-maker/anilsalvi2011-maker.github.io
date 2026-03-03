@@ -18,6 +18,37 @@
 body{
   background:#0f172a;
   color:white;
+  overflow-x:hidden;
+}
+
+/* ===== AMAZON STYLE INTRO ===== */
+#intro-overlay{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:#000814;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+#intro-logo{
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  border:5px solid #facc15;
+  transition:all 1.8s cubic-bezier(.77,0,.18,1);
+}
+
+/* Final position */
+.shrink-move{
+  position:absolute;
+  top:20px;
+  left:8%;
+  width:60px !important;
+  height:60px !important;
+  border-width:3px !important;
 }
 
 /* PREMIUM NAVBAR */
@@ -133,7 +164,6 @@ h2{
   box-shadow:0 0 25px rgba(250,204,21,0.4);
 }
 
-/* ACHIEVEMENT IMAGES */
 .achievement-images{
   margin-top:40px;
   display:grid;
@@ -176,6 +206,11 @@ footer{
 
 <body>
 
+<!-- AMAZON STYLE INTRO -->
+<div id="intro-overlay">
+  <img src="logo.png" id="intro-logo">
+</div>
+
 <nav>
   <div class="logo">
     <img src="logo.png" alt="logo">
@@ -196,6 +231,7 @@ footer{
   <img src="Myphoto.png" alt="My Photo">
 </section>
 
+<!-- SECTIONS -->
 <div id="about" class="content">
   <h2>About Me</h2>
   <div class="card">
@@ -232,9 +268,9 @@ footer{
   <div class="card">🛡 Prahari Club – National Child Rights (Teacher In-Charge)</div>
 
   <div class="achievement-images">
-      <img src="award1.jpg" alt="">
-      <img src="award2.jpg" alt="">
-      <img src="eco.jpg" alt="">
+      <img src="award1.jpg">
+      <img src="award2.jpg">
+      <img src="eco.jpg">
   </div>
 </div>
 
@@ -244,11 +280,29 @@ footer{
 
 <script>
 
+/* AMAZON INTRO ANIMATION */
+window.addEventListener("load", function(){
+
+  setTimeout(function(){
+    document.getElementById("intro-logo").classList.add("shrink-move");
+  }, 800);
+
+  setTimeout(function(){
+    document.getElementById("intro-overlay").style.transition="opacity 1s ease";
+    document.getElementById("intro-overlay").style.opacity="0";
+  }, 2500);
+
+  setTimeout(function(){
+    document.getElementById("intro-overlay").style.display="none";
+  }, 3500);
+
+});
+
+/* SECTION TOGGLE */
 function showSection(id, element){
   document.querySelectorAll(".content").forEach(sec=>{
     sec.classList.remove("active");
   });
-
   document.getElementById(id).classList.add("active");
 
   document.querySelectorAll("nav ul li a").forEach(btn=>{
