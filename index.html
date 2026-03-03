@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
   margin:0;
   padding:0;
@@ -120,7 +119,6 @@ h2{
   margin-bottom:30px;
 }
 
-/* CARD STYLE */
 .card{
   background:#1e293b;
   padding:25px;
@@ -173,7 +171,6 @@ footer{
     font-size:28px;
   }
 }
-
 </style>
 </head>
 
@@ -189,14 +186,14 @@ footer{
     <li><a onclick="showSection('experience', this)">Experience</a></li>
     <li><a onclick="showSection('education', this)">Education</a></li>
     <li><a onclick="showSection('achievements', this)">Achievements</a></li>
-    <li><a href="projects.html">Projects</a></li>
+    <li><a href="products.html">Products</a></li>
   </ul>
 </nav>
 
 <section class="hero">
   <h1>Hello, I'm <span class="highlight">Anil Salvi</span></h1>
   <div class="typing" id="typing"></div>
-  <img src="Myphoto.png" alt="My Photo">
+  <img src="myphoto.png" alt="My Photo">
 </section>
 
 <div id="about" class="content">
@@ -230,15 +227,14 @@ footer{
 
 <div id="achievements" class="content">
   <h2>Achievements</h2>
-
   <div class="card">🏆 Best Teacher Award 2025–26 – Indian Talent Olympiad</div>
   <div class="card">🌱 Eco Club – Mission LiFE (Teacher In-Charge)</div>
   <div class="card">🛡 Prahari Club – National Child Rights (Teacher In-Charge)</div>
 
   <div class="achievement-images">
-      <img src="award1.jpg" alt="Best Teacher Award">
-      <img src="award2.jpg" alt="Teacher Certificate">
-      <img src="eco.jpg" alt="Eco Club Document">
+      <img src="award1.jpg" alt="">
+      <img src="award2.jpg" alt="">
+      <img src="eco.jpg" alt="">
   </div>
 </div>
 
@@ -259,7 +255,9 @@ function showSection(id, element){
     btn.classList.remove("active-nav");
   });
 
-  element.classList.add("active-nav");
+  if(element){
+    element.classList.add("active-nav");
+  }
 }
 
 /* Typing Effect */
