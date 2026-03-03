@@ -31,6 +31,7 @@ body{
   justify-content:center;
   align-items:center;
   z-index:9999;
+  overflow:hidden;
 }
 
 #intro-logo{
@@ -38,17 +39,9 @@ body{
   height:220px;
   border-radius:50%;
   border:5px solid #facc15;
-  transition:all 1.8s cubic-bezier(.77,0,.18,1);
-}
-
-/* Final position */
-.shrink-move{
   position:absolute;
-  top:20px;
-  left:8%;
-  width:60px !important;
-  height:60px !important;
-  border-width:3px !important;
+  transition:transform 1.6s cubic-bezier(.77,0,.18,1),
+             border-width 1.6s ease;
 }
 
 /* PREMIUM NAVBAR */
@@ -231,7 +224,6 @@ footer{
   <img src="Myphoto.png" alt="My Photo">
 </section>
 
-<!-- SECTIONS -->
 <div id="about" class="content">
   <h2>About Me</h2>
   <div class="card">
@@ -280,21 +272,36 @@ footer{
 
 <script>
 
-/* AMAZON INTRO ANIMATION */
+/* AMAZON INTRO ANIMATION - PRECISE POSITIONING */
 window.addEventListener("load", function(){
 
-  setTimeout(function(){
-    document.getElementById("intro-logo").classList.add("shrink-move");
+  const introLogo = document.getElementById("intro-logo");
+  const navLogo = document.querySelector(".logo img");
+
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  const navRect = navLogo.getBoundingClientRect();
+  const navCenterX = navRect.left + navRect.width / 2;
+  const navCenterY = navRect.top + navRect.height / 2;
+
+  const moveX = navCenterX - centerX;
+  const moveY = navCenterY - centerY;
+
+  setTimeout(() => {
+    introLogo.style.transform =
+      translate(${moveX}px, ${moveY}px) scale(0.27);
+    introLogo.style.borderWidth = "3px";
   }, 800);
 
-  setTimeout(function(){
+  setTimeout(() => {
     document.getElementById("intro-overlay").style.transition="opacity 1s ease";
     document.getElementById("intro-overlay").style.opacity="0";
-  }, 2500);
+  }, 2600);
 
-  setTimeout(function(){
+  setTimeout(() => {
     document.getElementById("intro-overlay").style.display="none";
-  }, 3500);
+  }, 3600);
 
 });
 
@@ -303,6 +310,7 @@ function showSection(id, element){
   document.querySelectorAll(".content").forEach(sec=>{
     sec.classList.remove("active");
   });
+
   document.getElementById(id).classList.add("active");
 
   document.querySelectorAll("nav ul li a").forEach(btn=>{
