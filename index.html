@@ -21,13 +21,14 @@ body{
   color:white;
 }
 
-/* NAVBAR */
+/* PREMIUM NAVBAR */
 nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 10%;
-  background:#0f172a;
+  padding:20px 8%;
+  background:rgba(8,21,43,0.9);
+  backdrop-filter:blur(10px);
 }
 
 .logo img{
@@ -40,22 +41,31 @@ nav{
 nav ul{
   display:flex;
   list-style:none;
+  gap:15px;
   flex-wrap:wrap;
-}
-
-nav ul li{
-  margin-left:25px;
 }
 
 nav ul li a{
   text-decoration:none;
   color:white;
-  transition:0.3s;
-  cursor:pointer;
+  padding:8px 18px;
+  border-radius:30px;
+  border:1px solid rgba(250,204,21,0.4);
+  transition:all 0.3s ease;
+  font-weight:500;
 }
 
 nav ul li a:hover{
-  color:#facc15;
+  background:#facc15;
+  color:#08152b;
+  box-shadow:0 0 15px rgba(250,204,21,0.6);
+}
+
+/* ACTIVE NAV BUTTON */
+.active-nav{
+  background:#facc15;
+  color:#08152b !important;
+  box-shadow:0 0 20px rgba(250,204,21,0.7);
 }
 
 /* HERO */
@@ -139,7 +149,6 @@ footer{
   opacity:0.7;
 }
 
-/* MOBILE */
 @media (max-width:768px){
   nav{
     flex-direction:column;
@@ -147,9 +156,6 @@ footer{
   nav ul{
     justify-content:center;
     margin-top:15px;
-  }
-  nav ul li{
-    margin:10px;
   }
   .hero h1{
     font-size:28px;
@@ -166,13 +172,14 @@ footer{
     <img src="logo.png" alt="logo">
   </div>
   <ul>
-    <li><a onclick="showSection('about')">About</a></li>
-    <li><a onclick="showSection('skills')">Education</a></li>
-    <li><a onclick="showSection('experience')">Experience</a></li>
-    <li><a onclick="showSection('education')">Skills</a></li>    
-    <li><a onclick="showSection('gallery')">Gallery</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a onclick="showSection('achievements')">Achievements</a></li>  </ul>
+    <li><a onclick="showSection('about', this)">About</a></li>
+    <li><a onclick="showSection('skills', this)">Skills</a></li>
+    <li><a onclick="showSection('experience', this)">Experience</a></li>
+    <li><a onclick="showSection('education', this)">Education</a></li>
+    <li><a onclick="showSection('achievements', this)">Achievements</a></li>
+    <li><a onclick="showSection('gallery', this)">Gallery</a></li>
+    <li><a href="products.html">Products</a></li>
+  </ul>
 </nav>
 
 <section class="hero">
@@ -184,72 +191,46 @@ footer{
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- SECTIONS -->
 <div id="about" class="content">
   <h2>About Me</h2>
-  Experienced education professional with administrative, digital and institutional coordination expertise.
+  <div class="card">
+    Experienced education professional with administrative and digital leadership expertise.
+  </div>
 </div>
 
-<!-- SKILLS -->
 <div id="skills" class="content">
   <h2>Skills</h2>
-  Administrative Operations • Website Management • HTML • CSS • JavaScript
+  <div class="card">
+    Administrative Operations • Website Management • HTML • CSS • JavaScript
+  </div>
 </div>
 
-<!-- EXPERIENCE -->
 <div id="experience" class="content">
   <h2>Experience</h2>
-  Acting School Coordinator – Academic & Digital System Leadership
+  <div class="card">
+    Acting School Coordinator – Academic & Digital System Leadership
+  </div>
 </div>
 
-<!-- EDUCATION -->
 <div id="education" class="content">
   <h2>Education</h2>
-  B.A. – Mumbai University (2022)<br><br>
-  B.Ed. – MIT-WPU University (2024)
+  <div class="card">
+    B.A. – Mumbai University (2022)<br><br>
+    B.Ed. – MIT-WPU University (2024)
+  </div>
 </div>
 
-<!-- ACHIEVEMENTS -->
 <div id="achievements" class="content">
   <h2>Achievements</h2>
-
-  <div class="card">
-    🏆 Best Teacher Award 2025–26<br><br>
-    Indian Talent Olympiad – National Recognition
-  </div>
-
-  <div class="card">
-    🛡 National Child Rights Protection – Prahari Club Leadership
-  </div>
-
-  <div class="card">
-    🎓 Acting School Coordinator – Institutional Growth & Digital Innovation
-  </div>
-
-  <div class="card">
-    🌱 Eco Club – Mission LiFE (Teacher In-Charge)<br><br>
-    Led sustainability initiatives under NEP 2020 including:
-    <br><br>
-    • Reduce & Recycle Campaigns  
-    • E-Waste Awareness  
-    • Save Water & Energy Programs  
-    • Anti Single-Use Plastic Drive  
-    • Sustainable Lifestyle Advocacy  
-  </div>
-
+  <div class="card">🏆 Best Teacher Award 2025–26 – Indian Talent Olympiad</div>
+  <div class="card">🌱 Eco Club – Mission LiFE (Teacher In-Charge)</div>
 </div>
 
-<!-- GALLERY -->
 <div id="gallery" class="content">
   <h2>Gallery</h2>
   <div class="card">
-    <img src="award1.jpg" style="width:100%;border-radius:15px;">
-  </div>
-  <div class="card">
-    <img src="award2.jpg" style="width:100%;border-radius:15px;">
-  </div>
-  <div class="card">
-    <img src="eco.jpg" style="width:100%;border-radius:15px;">
+    Add your images here.
   </div>
 </div>
 
@@ -259,30 +240,28 @@ footer{
 
 <script>
 
-/* SECTION TOGGLE */
-function showSection(id){
+/* SECTION TOGGLE WITH ACTIVE BUTTON */
+function showSection(id, element){
   document.querySelectorAll(".content").forEach(sec=>{
     sec.classList.remove("active");
   });
+
   document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll("nav ul li a").forEach(btn=>{
+    btn.classList.remove("active-nav");
+  });
+
+  element.classList.add("active-nav");
 }
 
 /* TYPING EFFECT */
-const texts=[
-  "Educator",
-  "National Awardee",
-  "School Leader",
-  "Digital Learning Innovator"
-];
-
-let textIndex=0;
-let charIndex=0;
-let isDeleting=false;
+const texts=["Educator","National Awardee","School Leader","Digital Learning Innovator"];
+let textIndex=0,charIndex=0,isDeleting=false;
 const typing=document.getElementById("typing");
 
 function typeEffect(){
   const current=texts[textIndex];
-
   if(!isDeleting){
     typing.textContent=current.substring(0,charIndex+1);
     charIndex++;
