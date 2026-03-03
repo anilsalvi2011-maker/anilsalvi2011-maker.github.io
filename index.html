@@ -21,7 +21,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== AMAZON STYLE INTRO ===== */
+/* ===== INTRO ===== */
 
 #intro-overlay{
   position:fixed;
@@ -39,10 +39,6 @@ body{
   height:220px;
   border-radius:50%;
   border:5px solid #facc15;
-  position:fixed;
-  left:50%;
-  top:50%;
-  transform:translate(-50%, -50%);
   transition:all 1.8s cubic-bezier(.77,0,.18,1);
 }
 
@@ -57,11 +53,18 @@ nav{
   backdrop-filter:blur(10px);
 }
 
+.logo{
+  width:60px;
+  height:60px;
+  position:relative;
+}
+
 .logo img{
   width:60px;
   height:60px;
   border-radius:50%;
   border:3px solid #facc15;
+  opacity:0; /* hidden initially */
 }
 
 nav ul{
@@ -91,11 +94,9 @@ nav ul li a:hover{
 .active-nav{
   background:#facc15;
   color:#08152b !important;
-  box-shadow:0 0 20px rgba(250,204,21,0.7);
 }
 
-/* ===== HERO ===== */
-
+/* HERO */
 .hero{
   text-align:center;
   padding:60px 20px;
@@ -113,7 +114,6 @@ nav ul li a:hover{
   font-size:18px;
   margin-top:10px;
   height:25px;
-  opacity:0.9;
 }
 
 .hero img{
@@ -125,27 +125,14 @@ nav ul li a:hover{
   border:5px solid #facc15;
 }
 
-/* ===== CONTENT ===== */
-
 .content{
   display:none;
   padding:50px 10%;
   text-align:center;
-  animation:fadeIn 0.4s ease;
 }
 
 .content.active{
   display:block;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-h2{
-  color:#facc15;
-  margin-bottom:30px;
 }
 
 .card{
@@ -154,31 +141,6 @@ h2{
   border-radius:18px;
   margin-bottom:25px;
   border:1px solid rgba(250,204,21,0.3);
-  transition:0.3s ease;
-}
-
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 0 25px rgba(250,204,21,0.4);
-}
-
-.achievement-images{
-  margin-top:40px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-}
-
-.achievement-images img{
-  width:100%;
-  border-radius:18px;
-  border:3px solid #facc15;
-  transition:0.3s ease;
-}
-
-.achievement-images img:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(250,204,21,0.6);
 }
 
 footer{
@@ -186,25 +148,12 @@ footer{
   padding:30px;
   opacity:0.7;
 }
-
-@media(max-width:768px){
-  nav{
-    flex-direction:column;
-  }
-  nav ul{
-    justify-content:center;
-    margin-top:15px;
-  }
-  .hero h1{
-    font-size:28px;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO OVERLAY -->
+<!-- INTRO -->
 <div id="intro-overlay">
   <img src="logo.png" id="intro-logo">
 </div>
@@ -212,7 +161,7 @@ footer{
 <!-- NAVBAR -->
 <nav>
   <div class="logo">
-    <img src="logo.png" alt="logo">
+    <img src="logo.png" id="nav-logo">
   </div>
   <ul>
     <li><a onclick="showSection('about', this)">About</a></li>
@@ -220,146 +169,46 @@ footer{
     <li><a onclick="showSection('experience', this)">Experience</a></li>
     <li><a onclick="showSection('education', this)">Education</a></li>
     <li><a onclick="showSection('achievements', this)">Achievements</a></li>
-    <li><a href="projects.html">Projects</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <h1>Hello, I'm <span class="highlight">Anil Salvi</span></h1>
   <div class="typing" id="typing"></div>
-  <img src="Myphoto.png" alt="My Photo">
+  <img src="Myphoto.png">
 </section>
 
-<!-- CONTENT SECTIONS -->
-
-<div id="about" class="content">
-  <h2>About Me</h2>
-  <div class="card">
-    Experienced education professional with administrative and digital leadership expertise.
-  </div>
-</div>
-
-<div id="skills" class="content">
-  <h2>Skills</h2>
-  <div class="card">
-    Administrative Operations • Website Management • HTML • CSS • JavaScript
-  </div>
-</div>
-
-<div id="experience" class="content">
-  <h2>Experience</h2>
-  <div class="card">
-    Acting School Coordinator – Academic & Digital Innovation Leadership
-  </div>
-</div>
-
-<div id="education" class="content">
-  <h2>Education</h2>
-  <div class="card">
-    B.A. – Mumbai University (2022)<br><br>
-    B.Ed. – MIT-WPU University (2024)
-  </div>
-</div>
-
-<div id="achievements" class="content">
-  <h2>Achievements</h2>
-  <div class="card">🏆 Best Teacher Award 2025–26 – Indian Talent Olympiad</div>
-  <div class="card">🌱 Eco Club – Mission LiFE (Teacher In-Charge)</div>
-  <div class="card">🛡 Prahari Club – National Child Rights (Teacher In-Charge)</div>
-
-  <div class="achievement-images">
-      <img src="award1.jpg">
-      <img src="award2.jpg">
-      <img src="eco.jpg">
-  </div>
-</div>
-
 <footer>
-  © 2026 Anil Salvi | All Rights Reserved
+© 2026 Anil Salvi | All Rights Reserved
 </footer>
 
 <script>
 
-/* ===== PERFECT PIXEL INTRO ===== */
+/* ===== STABLE AMAZON INTRO ===== */
 
-window.addEventListener("load", function(){
+window.onload = function(){
 
-  const introLogo = document.getElementById("intro-logo");
-  const navLogo = document.querySelector(".logo img");
+  const intro = document.getElementById("intro-logo");
+  const navLogo = document.getElementById("nav-logo");
 
+  // Step 1: Move intro logo to top-left area (where navbar logo is)
   setTimeout(() => {
-
-    const navRect = navLogo.getBoundingClientRect();
-    const navCenterX = navRect.left + navRect.width / 2;
-    const navCenterY = navRect.top + navRect.height / 2;
-
-    const screenCenterX = window.innerWidth / 2;
-    const screenCenterY = window.innerHeight / 2;
-
-    const moveX = navCenterX - screenCenterX;
-    const moveY = navCenterY - screenCenterY;
-
-    introLogo.style.transform =
-      translate(${moveX}px, ${moveY}px) scale(${navRect.width / 220});
-
-    introLogo.style.borderWidth = "3px";
-
+    intro.style.transform = "translate(-42vw, -40vh) scale(0.27)";
+    intro.style.borderWidth = "3px";
   }, 800);
 
+  // Step 2: Fade overlay
   setTimeout(() => {
-    document.getElementById("intro-overlay").style.opacity="0";
+    document.getElementById("intro-overlay").style.opacity = "0";
   }, 2600);
 
+  // Step 3: Remove overlay and reveal navbar logo
   setTimeout(() => {
-    document.getElementById("intro-overlay").style.display="none";
+    document.getElementById("intro-overlay").style.display = "none";
+    navLogo.style.opacity = "1";
   }, 3600);
 
-});
-
-/* ===== SECTION SWITCHING ===== */
-
-function showSection(id, element){
-  document.querySelectorAll(".content").forEach(sec=>{
-    sec.classList.remove("active");
-  });
-
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll("nav ul li a").forEach(btn=>{
-    btn.classList.remove("active-nav");
-  });
-
-  if(element){
-    element.classList.add("active-nav");
-  }
-}
-
-/* ===== TYPING EFFECT ===== */
-
-const texts=["Educator","National Awardee","School Leader","Digital Learning Innovator"];
-let textIndex=0,charIndex=0,isDeleting=false;
-const typing=document.getElementById("typing");
-
-function typeEffect(){
-  const current=texts[textIndex];
-  if(!isDeleting){
-    typing.textContent=current.substring(0,charIndex+1);
-    charIndex++;
-    if(charIndex===current.length){
-      setTimeout(()=>isDeleting=true,1200);
-    }
-  }else{
-    typing.textContent=current.substring(0,charIndex-1);
-    charIndex--;
-    if(charIndex===0){
-      isDeleting=false;
-      textIndex=(textIndex+1)%texts.length;
-    }
-  }
-  setTimeout(typeEffect,isDeleting?50:100);
-}
-typeEffect();
+};
 
 </script>
 
