@@ -21,7 +21,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== PERFECT PIXEL AMAZON INTRO ===== */
+/* ===== AMAZON STYLE INTRO ===== */
 
 #intro-overlay{
   position:fixed;
@@ -31,6 +31,7 @@ body{
   justify-content:center;
   align-items:center;
   z-index:9999;
+  transition:opacity 1s ease;
 }
 
 #intro-logo{
@@ -41,12 +42,12 @@ body{
   position:fixed;
   left:50%;
   top:50%;
-  transform:translate(-50%, -50%) scale(1);
-  transition:transform 1.8s cubic-bezier(.77,0,.18,1),
-             border-width 1.8s ease;
+  transform:translate(-50%, -50%);
+  transition:all 1.8s cubic-bezier(.77,0,.18,1);
 }
 
-/* PREMIUM NAVBAR */
+/* ===== NAVBAR ===== */
+
 nav{
   display:flex;
   justify-content:space-between;
@@ -93,7 +94,8 @@ nav ul li a:hover{
   box-shadow:0 0 20px rgba(250,204,21,0.7);
 }
 
-/* HERO */
+/* ===== HERO ===== */
+
 .hero{
   text-align:center;
   padding:60px 20px;
@@ -123,7 +125,8 @@ nav ul li a:hover{
   border:5px solid #facc15;
 }
 
-/* CONTENT */
+/* ===== CONTENT ===== */
+
 .content{
   display:none;
   padding:50px 10%;
@@ -201,11 +204,12 @@ footer{
 
 <body>
 
-<!-- AMAZON STYLE INTRO -->
+<!-- INTRO OVERLAY -->
 <div id="intro-overlay">
   <img src="logo.png" id="intro-logo">
 </div>
 
+<!-- NAVBAR -->
 <nav>
   <div class="logo">
     <img src="logo.png" alt="logo">
@@ -220,11 +224,14 @@ footer{
   </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <h1>Hello, I'm <span class="highlight">Anil Salvi</span></h1>
   <div class="typing" id="typing"></div>
   <img src="Myphoto.png" alt="My Photo">
 </section>
+
+<!-- CONTENT SECTIONS -->
 
 <div id="about" class="content">
   <h2>About Me</h2>
@@ -274,45 +281,44 @@ footer{
 
 <script>
 
-/* PERFECT PIXEL INTRO */
+/* ===== PERFECT PIXEL INTRO ===== */
+
 window.addEventListener("load", function(){
 
   const introLogo = document.getElementById("intro-logo");
   const navLogo = document.querySelector(".logo img");
 
-  requestAnimationFrame(() => {
+  setTimeout(() => {
 
     const navRect = navLogo.getBoundingClientRect();
     const navCenterX = navRect.left + navRect.width / 2;
     const navCenterY = navRect.top + navRect.height / 2;
 
-    const logoRect = introLogo.getBoundingClientRect();
-    const logoCenterX = logoRect.left + logoRect.width / 2;
-    const logoCenterY = logoRect.top + logoRect.height / 2;
+    const screenCenterX = window.innerWidth / 2;
+    const screenCenterY = window.innerHeight / 2;
 
-    const moveX = navCenterX - logoCenterX;
-    const moveY = navCenterY - logoCenterY;
+    const moveX = navCenterX - screenCenterX;
+    const moveY = navCenterY - screenCenterY;
 
-    setTimeout(() => {
-      introLogo.style.transform =
-        translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px)) scale(${navRect.width / 220});
-      introLogo.style.borderWidth = "3px";
-    }, 900);
+    introLogo.style.transform =
+      translate(${moveX}px, ${moveY}px) scale(${navRect.width / 220});
 
-  });
+    introLogo.style.borderWidth = "3px";
+
+  }, 800);
 
   setTimeout(() => {
-    document.getElementById("intro-overlay").style.transition="opacity 1s ease";
     document.getElementById("intro-overlay").style.opacity="0";
-  }, 2900);
+  }, 2600);
 
   setTimeout(() => {
     document.getElementById("intro-overlay").style.display="none";
-  }, 3900);
+  }, 3600);
 
 });
 
-/* SECTION TOGGLE */
+/* ===== SECTION SWITCHING ===== */
+
 function showSection(id, element){
   document.querySelectorAll(".content").forEach(sec=>{
     sec.classList.remove("active");
@@ -329,7 +335,8 @@ function showSection(id, element){
   }
 }
 
-/* Typing Effect */
+/* ===== TYPING EFFECT ===== */
+
 const texts=["Educator","National Awardee","School Leader","Digital Learning Innovator"];
 let textIndex=0,charIndex=0,isDeleting=false;
 const typing=document.getElementById("typing");
